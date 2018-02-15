@@ -17,7 +17,6 @@
 
 #include "Prefix.hpp"
 #include "MultiplyWithExponent.hpp"
-#include <cmath>
 #include <limits>
 
 namespace LightUnits {
@@ -68,7 +67,7 @@ namespace LightUnits {
 
         friend inline constexpr BaseUnit operator*(BaseUnit const& lhs, float const& rhs)
         {
-            float scaled = std::round(rhs * lhs.m_value);
+            float scaled = rhs * lhs.m_value;
             return BaseUnit(static_cast<ValueType>(scaled));
         }
 
@@ -86,7 +85,7 @@ namespace LightUnits {
         }
 
         friend inline constexpr BaseUnit operator/(BaseUnit const& lhs, float const& rhs) {
-            float scaled = std::round(lhs.m_value / rhs);
+            float scaled = lhs.m_value / rhs;
             return BaseUnit(static_cast<ValueType>(scaled));
         }
 
