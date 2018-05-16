@@ -128,3 +128,17 @@ TEST_CASE("FloatTimesUnit") {
     REQUIRE(4.f   * Create(10) == Create(40));
     REQUIRE(-0.4f * Create(100) == Create(-40));
 }
+
+TEST_CASE("NumericLimitsTypeTraitMax_EqualsBaseTypeMin")
+{
+    auto base = std::numeric_limits<DummyType::ValueType>::max();
+    auto unit = std::numeric_limits<TestUnit>::max();
+    REQUIRE(base == unit.To<DummyType::BasePrefix>());
+}
+
+TEST_CASE("NumericLimitsTypeTraitMin_EqualsBaseTypeMax")
+{
+    auto base = std::numeric_limits<DummyType::ValueType>::min();
+    auto unit = std::numeric_limits<TestUnit>::min();
+    REQUIRE(base == unit.To<DummyType::BasePrefix>());
+}

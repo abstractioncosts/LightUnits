@@ -57,12 +57,12 @@ namespace LightUnits {
         }
 
 
-        friend inline constexpr BaseUnit operator*(BaseUnit const& lhs, ValueType const& rhs) {
-            return BaseUnit(lhs.m_value*rhs);
+        friend inline constexpr BaseUnit operator*(BaseUnit const &lhs, ValueType const &rhs) {
+            return BaseUnit(lhs.m_value * rhs);
         }
 
-        friend inline constexpr BaseUnit operator*(ValueType const& lhs, BaseUnit const& rhs) {
-            return rhs*lhs;
+        friend inline constexpr BaseUnit operator*(ValueType const &lhs, BaseUnit const &rhs) {
+            return rhs * lhs;
         }
 
         friend inline constexpr BaseUnit operator*(BaseUnit const& lhs, float const& rhs)
@@ -73,44 +73,44 @@ namespace LightUnits {
 
         friend inline constexpr BaseUnit operator*(float const& lhs, BaseUnit const& rhs)
         {
-            return rhs*lhs;
+            return rhs * lhs;
         }
 
         inline constexpr float operator/(BaseUnit const &rhs) const {
             return static_cast<float>(Raw()) / rhs.Raw();
         }
 
-        friend inline constexpr BaseUnit operator/(BaseUnit const& lhs, ValueType const& rhs) {
-            return BaseUnit(lhs.m_value/rhs);
+        friend inline constexpr BaseUnit operator/(BaseUnit const &lhs, ValueType const &rhs) {
+            return BaseUnit(lhs.m_value / rhs);
         }
 
-        friend inline constexpr BaseUnit operator/(BaseUnit const& lhs, float const& rhs) {
+        friend inline constexpr BaseUnit operator/(BaseUnit const &lhs, float const &rhs) {
             float scaled = lhs.m_value / rhs;
             return BaseUnit(static_cast<ValueType>(scaled));
         }
 
         /// Comparision operators
-        friend constexpr bool operator==(BaseUnit const& lhs, BaseUnit const& rhs) {
+        friend constexpr bool operator==(BaseUnit const &lhs, BaseUnit const &rhs) {
             return lhs.m_value == rhs.m_value;
         }
 
-        friend constexpr bool operator!=(BaseUnit const& lhs, BaseUnit const& rhs) {
+        friend constexpr bool operator!=(BaseUnit const &lhs, BaseUnit const &rhs) {
             return lhs.m_value != rhs.m_value;
         }
 
-        friend constexpr bool operator<(BaseUnit const& lhs, BaseUnit const& rhs) {
+        friend constexpr bool operator<(BaseUnit const &lhs, BaseUnit const &rhs) {
             return lhs.m_value < rhs.m_value;
         }
 
-        friend constexpr bool operator>(BaseUnit const& lhs, BaseUnit const& rhs) {
+        friend constexpr bool operator>(BaseUnit const &lhs, BaseUnit const &rhs) {
             return lhs.m_value > rhs.m_value;
         }
 
-        friend constexpr bool operator<=(BaseUnit const& lhs, BaseUnit const& rhs) {
+        friend constexpr bool operator<=(BaseUnit const &lhs, BaseUnit const &rhs) {
             return lhs.m_value <= rhs.m_value;
         }
 
-        friend constexpr bool operator>=(BaseUnit const& lhs, BaseUnit const& rhs) {
+        friend constexpr bool operator>=(BaseUnit const &lhs, BaseUnit const &rhs) {
             return lhs.m_value >= rhs.m_value;
         }
 
@@ -129,18 +129,6 @@ namespace LightUnits {
                     detail::DecadesDiff(T_Representation::BasePrefix, target)>(m_value);
         }
 
-        // TODO Better implement type trait numeric_limits?!
-        static constexpr BaseUnit max()
-        {
-            return BaseUnit(std::numeric_limits<ValueType>::max());
-        }
-
-        static constexpr BaseUnit min()
-        {
-            return BaseUnit(std::numeric_limits<ValueType>::min());
-        }
-
-
     protected:
         explicit constexpr BaseUnit(ValueType value)
                 : m_value(value) {
@@ -153,5 +141,27 @@ namespace LightUnits {
 
     protected:
         ValueType m_value;
+
+        friend class std::numeric_limits<LightUnits::BaseUnit<TypeTag, T_Representation>>;
+    };
+}
+
+namespace std
+{
+    template<typename Tag, typename Rep>
+    struct numeric_limits<LightUnits::BaseUnit<Tag, Rep>> {
+        static constexpr bool is_specialized = true;
+
+        static constexpr LightUnits::BaseUnit<Tag, Rep> min() {
+            return LightUnits::BaseUnit<Tag, Rep>(
+                    std::numeric_limits<typename LightUnits::BaseUnit<Tag, Rep>::ValueType>::min()
+            );
+        };
+
+        static constexpr LightUnits::BaseUnit<Tag, Rep> max() {
+            return LightUnits::BaseUnit<Tag, Rep>(
+                    std::numeric_limits<typename LightUnits::BaseUnit<Tag, Rep>::ValueType>::max()
+            );
+        };
     };
 }
