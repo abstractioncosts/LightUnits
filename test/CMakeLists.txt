@@ -26,5 +26,5 @@ set(SOURCE_FILES CatchMain.cpp BaseUnitTest.cpp ExampleConversionTest.cpp ValueS
 add_executable(LightUnitsTest ${SOURCE_FILES})
 target_link_libraries(LightUnitsTest LightUnits)
 add_dependencies(LightUnitsTest catch)
-target_include_directories(LightUnitsTest PRIVATE "example/")
+target_include_directories(LightUnitsTest PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../example/")
 target_include_directories(LightUnitsTest PRIVATE ${CMAKE_BINARY_DIR}/external/include/catch)
