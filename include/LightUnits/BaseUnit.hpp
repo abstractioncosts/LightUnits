@@ -89,6 +89,19 @@ namespace LightUnits {
             return BaseUnit(static_cast<ValueType>(scaled));
         }
 
+        /// Modulo operator for Unit modulo Unit returns Unit
+        ///
+        /// \example        5s % 3s = (2s) = 3s*1 + (2s)
+        /// Consistent to   5s / 3s = (1)  = 3s*(1) + 2s
+        ///
+        /// \returns Remainder of lhs / rhs
+        ///
+        friend inline constexpr BaseUnit operator%(BaseUnit const& lhs, BaseUnit const& rhs)
+        {
+            ValueType remainder = lhs.m_value % rhs.m_value;
+            return BaseUnit(remainder);
+        }
+
         /// Comparision operators
         friend constexpr bool operator==(BaseUnit const &lhs, BaseUnit const &rhs) {
             return lhs.m_value == rhs.m_value;

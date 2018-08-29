@@ -1,6 +1,7 @@
 #include <catch.hpp>
 #include <LightUnits/BaseUnit.hpp>
 #include <cstdint>
+#include <type_traits>
 
 using namespace LightUnits;
 
@@ -73,6 +74,14 @@ TEST_CASE("Addition_ResultIsSum") {
 TEST_CASE("Subtraction_ResultIsDiff") {
     auto const diff = Create(a) - Create(b);
     REQUIRE(diff == Create(a-b));
+}
+
+TEST_CASE("Modulo_ResultIsOfUnitType") {
+   TestUnit x = Create(5);
+   TestUnit y = Create(3);
+   auto res = x % y;
+   static_assert(std::is_same<decltype(x), decltype(res)>::value, "Unit modulo Unit has to be of type Unit");
+   REQUIRE(res == Create(2));
 }
 
 TEST_CASE("EqualTo_AisA") {
