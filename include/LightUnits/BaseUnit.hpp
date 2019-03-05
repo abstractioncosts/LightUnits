@@ -136,10 +136,30 @@ namespace LightUnits {
             return BaseUnit(res);
         }
 
+        /// Converts the given float value with maximum precision to underlying representation
+        ///
+        /// \example underlying representation int / BasePrefix Milli
+        ///          A value of 1,0204f will get converted to 1020. The last digit 4 exceeds the target
+        ///          precision and is discarded.
+        ///
+        static constexpr BaseUnit FromFloat(float val) {
+            constexpr int exp = detail::DecadesDiff(Prefix::One, T_Representation::BasePrefix);
+            float val_correctExp = val * detail::ExponentToMultiplier<exp>::value;
+            return BaseUnit::From<T_Representation::BasePrefix>( static_cast<BaseUnit::ValueType>(val_correctExp));
+        }
+
         template<Prefix target>
         constexpr ValueType To() const {
             return detail::MultiplyWithExponent<
                     detail::DecadesDiff(T_Representation::BasePrefix, target)>(m_value);
+        }
+
+        /// Converts the value to a float representation
+        ///
+        constexpr float ToFloat() const {
+            constexpr int exp = detail::DecadesDiff(Prefix::One, T_Representation::BasePrefix);
+            float val_correctExp = static_cast<float>(m_value) / detail::ExponentToMultiplier<exp>::value;
+            return val_correctExp;
         }
 
     protected:

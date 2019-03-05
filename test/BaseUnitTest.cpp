@@ -151,3 +151,34 @@ TEST_CASE("NumericLimitsTypeTraitMin_EqualsBaseTypeMax")
     auto unit = std::numeric_limits<TestUnit>::min();
     REQUIRE(base == unit.To<DummyType::BasePrefix>());
 }
+
+TEST_CASE("FromFloat_1")
+{
+    // Base Unit is saved as Milli
+    REQUIRE(TestUnit::FromFloat(1.0f) == Create(1000));
+}
+
+TEST_CASE("FromFloat_FullPrecision")
+{
+    REQUIRE(TestUnit::FromFloat(1.234f) == Create(1234));
+}
+
+TEST_CASE("FromFloat_LoosePrecision")
+{
+    REQUIRE(TestUnit::FromFloat(1.2345f) == Create(1234));
+}
+
+TEST_CASE("FromFloat_10")
+{
+    REQUIRE(TestUnit::FromFloat(10.0f) == Create(10*1000));
+}
+
+TEST_CASE("ToFloat_1")
+{
+    REQUIRE(Create(1000).ToFloat() == 1.0f);
+}
+
+TEST_CASE("ToFloat_PreserveAllAvailableDigits")
+{
+    REQUIRE(Create(1000 + 123).ToFloat() == 1.123f);
+}
