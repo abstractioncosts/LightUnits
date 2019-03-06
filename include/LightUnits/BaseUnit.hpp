@@ -175,7 +175,7 @@ namespace LightUnits {
     protected:
         ValueType m_value;
 
-        friend class std::numeric_limits<LightUnits::BaseUnit<TypeTag, T_Representation>>;
+        friend struct std::numeric_limits<LightUnits::BaseUnit<TypeTag, T_Representation>>;
     };
 }
 
