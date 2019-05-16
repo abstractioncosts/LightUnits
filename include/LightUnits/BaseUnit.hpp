@@ -91,8 +91,8 @@ namespace LightUnits {
 
         /// Modulo operator for Unit modulo Unit returns Unit
         ///
-        /// \example        5s % 3s = (2s) = 3s*1 + (2s)
-        /// Consistent to   5s / 3s = (1)  = 3s*(1) + 2s
+        /// Example:         5s % 3s = (2s) = 3s*1 + (2s)
+        /// Consistent to:   5s / 3s = (1)  = 3s*(1) + 2s
         ///
         /// \returns Remainder of lhs / rhs
         ///
@@ -138,7 +138,7 @@ namespace LightUnits {
 
         /// Converts the given float value with maximum precision to underlying representation
         ///
-        /// \example underlying representation int / BasePrefix Milli
+        /// Example: Underlying representation int / BasePrefix Milli
         ///          A value of 1,0204f will get converted to 1020. The last digit 4 exceeds the target
         ///          precision and is discarded.
         ///

@@ -24,7 +24,7 @@ namespace LightUnits {
     /// - Each list item has to have at least double the size in bits than its predecessor.
     /// - A list must consist entirely of either signed or unsigned items
     ///
-    /// \example Valid lists:
+    /// Example for valid lists:
     ///     USys<int32_t>, USys<int8_t, int16_t>, USys<int8_t, int16_t, int64_t>
     ///
     template<typename ... Ts>

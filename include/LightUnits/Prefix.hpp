@@ -29,7 +29,7 @@ namespace LightUnits {
 
         /// @brief Determine difference of prefixes in ordner of magnitude
         ///
-        /// @example source=Milli,target=Micro
+        /// Example: source=Milli,target=Micro
         /// DecadesDiff=(-3)-(-6)=3
         /// Ie. a unit denominated in Milli-sth. has to be multiplied by 10^3 to yield a unit denominated in Micro-sth.
         ///
@@ -39,7 +39,7 @@ namespace LightUnits {
 
         /// @brief Determine order of magnitude of correction factor for multiplication
         ///
-        /// @example: U=I*R
+        /// Example: U=I*R
         /// [U] in mV
         /// [R] in mOhm
         /// [I] in uA
@@ -52,7 +52,7 @@ namespace LightUnits {
 
         /// @brief Determine order of magnitude of correction factor for multiplication
         ///
-        /// @example: I=U/R
+        /// Example: I=U/R
         /// [U] in mV
         /// [R] in mOhm
         /// [I] in uA
