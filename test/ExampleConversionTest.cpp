@@ -1,5 +1,3 @@
-// Hier Test der Conversion, statt Test von UnitMult, da mit weniger Boilerplate zu schreiben
-
 #include <catch.hpp>
 #include <IntegralUnits/Conversions.hpp>
 
@@ -24,9 +22,6 @@ TEST_CASE("Division_Explore")
     // Volt BasePrefix Milli
     // Ohm  BasePrefix Milli
     REQUIRE(1_mV/2_Ohm == 500_uA);
-    // Multiplikation mit Faktor 1E6, dann Teilen durch Ohm
-    // Multiplikation kann Wertebereich verlassen!
-    // Ampere BasePrefix Micro
 }
 
 TEST_CASE("Division_Regression")

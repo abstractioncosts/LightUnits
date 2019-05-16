@@ -19,9 +19,9 @@
 #include <cstdint>
 #include <limits>
 
-// int statt int32_t verwenden, da int32_t beispielsweise bei ARM Cortex Targets intern typedef auf long int hat (beides 32-bit)
-// long int hat aber andere Promotion Regeln, so dass man Integer im Zusammenhang mit den Units
-// bei int32_t immer mit long-Suffix (1l statt 1 etc) benutzen muss, oder es zu einem ambiguous-error kommt
+// Use int instead of int32_t, because int32_t is sometimes (e.g. arm gcc for cortex-m targets) type-deffed to long int
+// long int is also 32-bit on these platforms, but causes different C++ integer promotion rules to apply
+// E.g. for int32_t, you always need to use the long-suffix (1l instead of 1) to prevent an "ambiguous-error" when using this library
 //
 using IntegralValueSystem = LightUnits::ValueSystem<std::int8_t, std::int16_t, int, std::int64_t>;
 
