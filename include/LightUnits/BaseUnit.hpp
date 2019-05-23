@@ -175,14 +175,15 @@ namespace LightUnits {
     protected:
         ValueType m_value;
 
-        friend struct std::numeric_limits<LightUnits::BaseUnit<TypeTag, T_Representation>>;
+        friend class std::numeric_limits<LightUnits::BaseUnit<TypeTag, T_Representation>>;
     };
 }
 
 namespace std
 {
     template<typename Tag, typename Rep>
-    struct numeric_limits<LightUnits::BaseUnit<Tag, Rep>> {
+    class numeric_limits<LightUnits::BaseUnit<Tag, Rep>> {
+    public:
         static constexpr bool is_specialized = true;
 
         static constexpr LightUnits::BaseUnit<Tag, Rep> min() {
