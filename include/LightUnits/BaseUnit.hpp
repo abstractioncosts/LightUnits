@@ -27,12 +27,6 @@ namespace LightUnits {
 
         BaseUnit() = default;
 
-        /// Assignment operators
-        inline constexpr BaseUnit &operator=(BaseUnit const &rhs) {
-            m_value = rhs.Raw();
-            return *this;
-        }
-
         /// Arithmetic operators
         inline constexpr BaseUnit &operator+=(BaseUnit const &rhs) {
             m_value += rhs.Raw();
