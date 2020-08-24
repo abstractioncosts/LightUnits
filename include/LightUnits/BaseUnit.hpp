@@ -27,6 +27,8 @@ namespace LightUnits {
 
         BaseUnit() = default;
 
+        BaseUnit(BaseUnit const&) = default;
+
         /// Arithmetic operators
         inline constexpr BaseUnit &operator+=(BaseUnit const &rhs) {
             m_value += rhs.Raw();
